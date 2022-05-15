@@ -1,31 +1,28 @@
 package com.infosus.prodajanekretnina.services;
 
-import com.infosus.prodajanekretnina.domain.AgentZaNekretnine;
 import com.infosus.prodajanekretnina.repositories.AgentZaNekretnineRepository;
+import com.infosus.prodajanekretnina.repositories.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class AgentZaNekretnineService implements UserDetailsService {
+public class KorisnikService implements UserDetailsService {
+
     private final static String USER_NOT_FOUND_MSG = "User with username %s not found";
-    private final AgentZaNekretnineRepository agentZaNekretnineRepository;
+    private final KorisnikRepository korisnikRepository;
+
     @Autowired
-    public AgentZaNekretnineService(AgentZaNekretnineRepository agentZaNekretnineRepository) {
-        this.agentZaNekretnineRepository = agentZaNekretnineRepository;
-    }
-    public List<AgentZaNekretnine> getAllAgents() {
-        List<AgentZaNekretnine> agents = agentZaNekretnineRepository.findAll();
-        return agents;
+    public KorisnikService(KorisnikRepository korisnikRepository) {
+        this.korisnikRepository = korisnikRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return agentZaNekretnineRepository.findAgentZaNekretnineByNazivAgenta(username)
+        return korisnikRepository.findByNazivKor(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG,username)));
     }
+
 }

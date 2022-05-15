@@ -26,6 +26,16 @@ public class Osoba {
     @Column(name = "datum_rod", nullable = false)
     private LocalDate datumRod;
 
+    public Osoba(BigDecimal oib, String ime, String prezime, LocalDate datumRod) {
+        this.oib = oib;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.datumRod = datumRod;
+    }
+
+    public Osoba() {
+    }
+
     public LocalDate getDatumRod() {
         return datumRod;
     }
