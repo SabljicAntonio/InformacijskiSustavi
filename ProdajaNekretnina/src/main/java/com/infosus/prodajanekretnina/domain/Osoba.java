@@ -10,11 +10,11 @@ import java.time.LocalDate;
 @Entity
 public class Osoba {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "osoba_id", nullable = false)
     private Integer id;
 
-    @Column(name = "oib", nullable = false, precision = 11)
+    @Column(name = "oib", nullable = false, unique = true, precision = 11)
     private BigDecimal oib;
 
     @Column(name = "ime", nullable = false, length = 50)

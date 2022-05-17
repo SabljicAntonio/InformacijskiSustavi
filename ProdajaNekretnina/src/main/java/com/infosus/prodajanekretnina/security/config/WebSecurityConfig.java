@@ -1,5 +1,6 @@
 package com.infosus.prodajanekretnina.security.config;
 
+import com.infosus.prodajanekretnina.services.AgentZaNekretnineService;
 import com.infosus.prodajanekretnina.services.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final KorisnikService korisnikService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AgentZaNekretnineService agentZaNekretnineService;
     @Autowired
-    public WebSecurityConfig(KorisnikService korisnikService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public WebSecurityConfig(KorisnikService korisnikService, AgentZaNekretnineService agentZaNekretnineService,BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.korisnikService = korisnikService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.agentZaNekretnineService = agentZaNekretnineService;
+
     }
 
     @Override
@@ -28,11 +32,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/register/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated().and()
-                .formLogin();
+                    .antMatchers("/","/register/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated().and()
+                .formLogin()
+                    //.loginPage("/login") //tu ce bit nas login page al treba ga napravit prvo
+                    .permitAll()
+                    .and()
+                .logout()
+                    .permitAll();
     }
 
     @Override
@@ -44,8 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        //provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(korisnikService);
+        provider.setUserDetailsService(agentZaNekretnineService);
         return provider;
     }
 }

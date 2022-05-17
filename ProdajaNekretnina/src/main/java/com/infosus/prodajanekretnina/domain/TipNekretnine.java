@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class TipNekretnine {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tip_nekret_id", nullable = false)
     private Integer id;
 

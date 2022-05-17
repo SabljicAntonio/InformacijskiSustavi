@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Entity
 public class Nekretnina {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nek_id", nullable = false)
     private Integer id;
 

@@ -16,7 +16,7 @@ import java.util.Collections;
 @Entity
 public class AgentZaNekretnine implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "agent_id", nullable = false)
     private Integer id;
 
@@ -38,9 +38,6 @@ public class AgentZaNekretnine implements UserDetails {
     @OneToOne(optional = false)
     @JoinColumn(name = "osoba_id", nullable = false)
     private Osoba osoba;
-
-    @Enumerated(EnumType.STRING)
-    private AppUserRole appUserRole = AppUserRole.AGENT;
 
     public AgentZaNekretnine(String nazivAgenta, Integer prodNek, String email, String sifra, String opis, Osoba osoba) {
         this.nazivAgenta = nazivAgenta;
@@ -123,7 +120,7 @@ public class AgentZaNekretnine implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(AppUserRole.AGENT.name());
         return Collections.singletonList(authority);
     }
 

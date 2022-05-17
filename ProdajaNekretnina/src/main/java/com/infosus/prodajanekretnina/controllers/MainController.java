@@ -1,6 +1,7 @@
 package com.infosus.prodajanekretnina.controllers;
 
 import com.infosus.prodajanekretnina.domain.AgentZaNekretnine;
+import com.infosus.prodajanekretnina.security.RegistrationRequestAgent;
 import com.infosus.prodajanekretnina.security.RegistrationRequestKorisnik;
 import com.infosus.prodajanekretnina.services.AgentZaNekretnineService;
 import com.infosus.prodajanekretnina.services.RegistrationService;
@@ -33,8 +34,27 @@ public class MainController {
 
     @PostMapping(path = "/register/korisnik")
     @ResponseBody
-    public String register(@RequestBody RegistrationRequestKorisnik request) {
+    public String registerKorisnik(@RequestBody RegistrationRequestKorisnik request) {
         return registrationService.registerKorisnik(request);
-
     }
+
+    @PostMapping(path = "/register/agent")
+    @ResponseBody
+    public String registerAgent(@RequestBody RegistrationRequestAgent request) {
+        return registrationService.registerAgent(request);
+    }
+
+    @GetMapping(path = "/login")
+    @ResponseBody
+    public String getLoginPage() {
+        return "login";
+    }
+
+    @GetMapping(path = "/")
+    @ResponseBody
+    public String getHomePage() {
+        return "home";
+    }
+
+
 }

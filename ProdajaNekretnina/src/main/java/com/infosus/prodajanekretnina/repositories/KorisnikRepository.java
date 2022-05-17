@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface KorisnikRepository extends JpaRepository<Korisnik, Integer> {
 
     Optional<Korisnik> findByNazivKor(String username);
+    Optional<Korisnik> findKorisnikByEmail(String mail);
 }

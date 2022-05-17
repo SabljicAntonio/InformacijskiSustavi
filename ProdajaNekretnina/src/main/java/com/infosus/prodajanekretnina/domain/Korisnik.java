@@ -16,7 +16,7 @@ import java.util.Collections;
 @Entity
 public class Korisnik implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "korisnik_id", nullable = false)
     private Integer id;
 
@@ -32,9 +32,6 @@ public class Korisnik implements UserDetails {
     @OneToOne(optional = false)
     @JoinColumn(name = "osoba_id", nullable = false)
     private Osoba osoba;
-
-    @Enumerated(EnumType.STRING)
-    private AppUserRole appUserRole = AppUserRole.KORISNIK;
 
 
     public Korisnik(String nazivKor, String email, String sifra, Osoba osoba) {
@@ -99,7 +96,7 @@ public class Korisnik implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(AppUserRole.KORISNIK.name());
         return Collections.singletonList(authority);
     }
 
