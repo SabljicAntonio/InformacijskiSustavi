@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-Homepage
+<h1>Prodaja nekretnina</h1>
+<br>
+<div class="container">
+    <a class="navbar-brand" th:href="@{/login/}">Već imate korisnički račun? Prijavite se</a>
+    </a>
+</div>
+<div class="container">
+    <a class="navbar-brand" th:href="@{/register/korisnik/}">Registrirajte se kao korisnik.</a>
+    </a>
+</div>
+<div class="container">
+    <a class="navbar-brand" th:href="@{/register/agent/}">Registrirajte se kao agent za nekretnine.</a>
+    </a>
+</div>
 </body>
 </html>

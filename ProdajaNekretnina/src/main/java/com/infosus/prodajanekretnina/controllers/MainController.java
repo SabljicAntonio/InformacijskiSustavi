@@ -8,10 +8,7 @@ import com.infosus.prodajanekretnina.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,10 +48,18 @@ public class MainController {
     }
 
     @GetMapping(path = "/")
-    @ResponseBody
     public String getHomePage() {
         return "home";
     }
 
+    @GetMapping(path = "/register/korisnik")
+    public String getRegistration() {
+        return "register";
+    }
+
+    @GetMapping(path = "/register/agent")
+    public String getRegistrationAgent() {
+        return "registerAgent";
+    }
 
 }
