@@ -1,9 +1,5 @@
 package com.infosus.prodajanekretnina.domain;
 
-import com.infosus.prodajanekretnina.security.AppUserRole;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,7 +10,7 @@ import java.util.Collections;
         @Index(name = "agent_za_nek_naziv_agenta_key", columnList = "naziv_agenta", unique = true)
 })
 @Entity
-public class AgentZaNekretnine implements UserDetails {
+public class AgentZaNekretnine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "agent_id", nullable = false)
@@ -118,39 +114,4 @@ public class AgentZaNekretnine implements UserDetails {
                 '}';
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(AppUserRole.AGENT.name());
-        return Collections.singletonList(authority);
-    }
-
-    @Override
-    public String getPassword() {
-        return sifra;
-    }
-
-    @Override
-    public String getUsername() {
-        return nazivAgenta;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

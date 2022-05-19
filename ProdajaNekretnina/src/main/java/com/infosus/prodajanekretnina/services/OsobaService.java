@@ -3,9 +3,6 @@ package com.infosus.prodajanekretnina.services;
 import com.infosus.prodajanekretnina.domain.Osoba;
 import com.infosus.prodajanekretnina.repositories.OsobaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

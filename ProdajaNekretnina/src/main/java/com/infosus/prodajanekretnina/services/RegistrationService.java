@@ -5,7 +5,6 @@ import com.infosus.prodajanekretnina.domain.Korisnik;
 import com.infosus.prodajanekretnina.domain.Osoba;
 import com.infosus.prodajanekretnina.repositories.KorisnikRepository;
 import com.infosus.prodajanekretnina.repositories.OsobaRepository;
-import com.infosus.prodajanekretnina.security.EmailValidator;
 import com.infosus.prodajanekretnina.security.RegistrationRequestAgent;
 import com.infosus.prodajanekretnina.security.RegistrationRequestKorisnik;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistrationService {
 
+    /*
     private final EmailValidator emailValidator;
     private final KorisnikService korisnikService;
     private final OsobaService osobaService;
@@ -69,5 +69,5 @@ public class RegistrationService {
         boolean reply = agentZaNekretnineService.signUpAgent(a);
         if(reply == true) System.out.println("Uspjesno registiranje agenta");
         return "works";
-    }
+    } */
 }
