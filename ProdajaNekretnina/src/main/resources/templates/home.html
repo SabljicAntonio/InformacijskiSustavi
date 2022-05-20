@@ -13,7 +13,7 @@
         <span class="naslov">Nekretnine</span>
     </a>
 </nav>
-<input id="filterAll"></input><button onclick="filterAll()" class="btn btn-primary">Država</button>
+<input id="filterAll"></input><button onclick="filterDrzava()" class="btn btn-primary">Država</button>
 <div>
     <table class="table table-hover" id="nekretnineTable">
         <thead>
@@ -42,6 +42,7 @@
                 <p th:text="${'O agentu: ' + nekretnina.getAgent().getOpis()}">  </p>
                 <p th:text="${'Prodanih nekretnina: ' + nekretnina.getAgent().getProdNek()}"> </p>
             </td>
+            <td style="display:none;" th:text="${nekretnina.getDrzava().getNaziv()}"></td>
             <td><button th:attr="onclick='hideAgent(\'' + ${nekretnina.getId()} + '\');'" class="btn btn-primary">Agent</button></td>
         </tr>
         </tbody>
@@ -51,6 +52,38 @@
 </div>
 
 <script>
+
+    function filterDrzava() {
+        var  table, tr, td, i, j;
+
+        //uzimamo tekst iz text polja
+        input = document.getElementById("filterAll").value.toUpperCase();
+
+        console.log(input.toString());
+        table = document.getElementById("nekretnineTable");
+        tr = table.getElementsByTagName("tr");
+        console.log(tr);
+
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 2; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td"); //za svaki redak dohvati stupce
+
+            if((input == "")
+            ) {
+                for(j = 2; j < tr.length+1; j++){
+                    tr[j].style.display="";
+                }
+            }
+
+            if((input == td[5].innerText.toUpperCase())
+                ) {
+                tr[i].style.display = "";
+            }
+            else {
+                tr[i].style.display = "none";
+            }
+        }}
 
     function hideAgent(indeks)    {
         var ind = "podaciAgenta_"+indeks;
