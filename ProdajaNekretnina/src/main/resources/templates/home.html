@@ -37,42 +37,30 @@
             <td><span th:text="${nekretnina.getAdresa()}"></span></td>
             <td><span th:text="${nekretnina.getPovrsina()}"></span></td>
             <td><span th:text="${nekretnina.getCijena()}"></span></td>
-            <td id="nazivAg" style="display: none;"><span th:text="${nekretnina.getAgent().getNazivAgenta()}"></span></td>
-            <td id="emailAg" style="display: none;"><span th:text="${nekretnina.getAgent().getEmail()}"></span></td>
-            <td id="opisAg" style="display: none;"><span th:text="${nekretnina.getAgent().getOpis()}"></span></td>
-            <td id="prodNekAg" style="display: none;"><span th:text="${nekretnina.getAgent().getProdNek()}"></span></td>
-            <td><button onclick="getAgentNek()" class="btn btn-primary">Agent</button></td>
+            <td style="display:none;" th:id="${nekretnina.getId()}"><p th:text="${'Ime agenta: ' + nekretnina.getAgent().getNazivAgenta()}">  </p>
+                <p th:text="${'E-adresa agenta: ' + nekretnina.getAgent().getEmail()}">  </p>
+                <p th:text="${'O agentu: ' + nekretnina.getAgent().getOpis()}">  </p>
+                <p th:text="${'Prodanih nekretnina: ' + nekretnina.getAgent().getProdNek()}"> </p>
+            </td>
+            <td><button th:attr="onclick='hideAgent(\'' + ${nekretnina.getId()} + '\');'" class="btn btn-primary">Agent</button></td>
         </tr>
         </tbody>
     </table>
 
-    <table class="table table-hover" id="agentTable">
-        <thead>
-        <tr>
-            <th> Naziv agenta </th>
-            <th> Email </th>
-            <th> Opis </th>
-            <th> Broj prodanih nekretnina </th>
-        </tr>
-        </thead>
-        <tr>
-            <td><input type="text" id="nazivAgenta" name="nazivAgenta"></td>
-            <td><input type="text" id="email" name="email"></td>
-            <td><input type="text" id="opis" name="opis"></td>
-            <td><input type="text" id="prodNek" name="prodNek"></td>
-        </tr>
-        <tbody id="podatciAgent">
-        <tr>
-            <td><span></span></td>
-            <td><span></span></td>
-            <td><span></span></td>
-            <td><span></span></td>
-        </tr>
-        </tbody>
-    </table>
+
 </div>
 
 <script>
+
+    function hideAgent(indeks)    {
+        var ind = "podaciAgenta_"+indeks;
+        var x = document.getElementById(indeks);
+        if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+  }
+    }
     function filter() {
         // Declare variables
         var input = new Array(4);
