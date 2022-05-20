@@ -1,6 +1,5 @@
 package com.infosus.prodajanekretnina.controllers;
 
-import com.infosus.prodajanekretnina.security.RegistrationRequestAgent;
 import com.infosus.prodajanekretnina.services.AgentZaNekretnineService;
 import com.infosus.prodajanekretnina.services.NekretninaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
     private final AgentZaNekretnineService agentZaNekretnineService;
-    //private final RegistrationService registrationService;
     private final NekretninaService nekretninaService;
 
     @Autowired

@@ -46,6 +46,21 @@ public class Nekretnina {
     @JoinColumn(name = "tip_nekret_id", nullable = false)
     private TipNekretnine tipNekret;
 
+    public Nekretnina(String nazivNek, String adresa, BigDecimal povrsina, Integer ocjena, String opis, Double cijena, Integer status, AgentZaNekretnine agent, Drzava drzava, TipNekretnine tipNekret) {
+        this.nazivNek = nazivNek;
+        this.adresa = adresa;
+        this.povrsina = povrsina;
+        this.ocjena = ocjena;
+        this.opis = opis;
+        this.cijena = cijena;
+        this.status = status;
+        this.agent = agent;
+        this.drzava = drzava;
+        this.tipNekret = tipNekret;
+    }
+
+    public Nekretnina() {}
+
     public TipNekretnine getTipNekret() {
         return tipNekret;
     }

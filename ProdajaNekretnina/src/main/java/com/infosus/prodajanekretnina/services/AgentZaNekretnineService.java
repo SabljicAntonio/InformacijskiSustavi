@@ -1,12 +1,11 @@
 package com.infosus.prodajanekretnina.services;
 
 import com.infosus.prodajanekretnina.domain.AgentZaNekretnine;
-import com.infosus.prodajanekretnina.domain.Korisnik;
 import com.infosus.prodajanekretnina.domain.Osoba;
 import com.infosus.prodajanekretnina.repositories.AgentZaNekretnineRepository;
-import com.infosus.prodajanekretnina.security.DeleteRequestAgent;
-import com.infosus.prodajanekretnina.security.PutRequestAgent;
-import com.infosus.prodajanekretnina.security.RegistrationRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.DeleteRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.PutRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.RegistrationRequestAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,7 @@ public class AgentZaNekretnineService {
         AgentZaNekretnine a = new AgentZaNekretnine(req.getNazivAgenta(), req.getProdNek(), req.getEmail(), req.getSifra(), req.getOpis(), o);
         boolean reply = signUpAgent(a);
         if(reply == false)  return "Neuspjesno registiranje agenta";
-        return "Uspjesno registiranje agenta";
+        return "Uspjesno registiranje agenta: " + a;
     }
 
     public String deleteAgent(DeleteRequestAgent req) {

@@ -1,12 +1,11 @@
 package com.infosus.prodajanekretnina.controllers;
 
 import com.infosus.prodajanekretnina.domain.AgentZaNekretnine;
-import com.infosus.prodajanekretnina.security.DeleteRequestAgent;
-import com.infosus.prodajanekretnina.security.PutRequestAgent;
-import com.infosus.prodajanekretnina.security.RegistrationRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.DeleteRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.PutRequestAgent;
+import com.infosus.prodajanekretnina.requests.agent.RegistrationRequestAgent;
 import com.infosus.prodajanekretnina.services.AgentZaNekretnineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +32,9 @@ public class AgentController {
         String status = agentZaNekretnineService.deleteAgent(req);
         return status;
     }
-
+    /**
+     * Po nazivAgenta se gleda koji ce se agent promjenit
+     * */
     @PutMapping(path = "/change/agent")
     public String putAgent(@RequestBody PutRequestAgent req) {
         String status = agentZaNekretnineService.putAgent(req);
