@@ -49,6 +49,7 @@ public class AgentZaNekretnineService {
         if(getAgentByUsername(req.getNazivAgenta()).isPresent()) {
             return "Agent sa tim usernameom već postoji!";
         }
+        if(agentZaNekretnineRepository.findAgentZaNekretnineByEmail(req.getEmail()).isPresent()) return "Agent sa tim emailom već postoji!";
         AgentZaNekretnine a = new AgentZaNekretnine(req.getNazivAgenta(), req.getProdNek(), req.getEmail(), req.getSifra(), req.getOpis(), o);
         boolean reply = signUpAgent(a);
         if(reply == false)  return "Neuspjesno registiranje agenta";
@@ -78,7 +79,8 @@ public class AgentZaNekretnineService {
         String noviOpis = req.getOpis();
         if(agentZaPut.isPresent()) {
             agent = agentZaPut.get();
-            if(!agent.getNazivAgenta().equals(req.getNoviNazivAgenta())) {
+
+            if(!agent.getNazivAgenta().equals(req.getNoviNazivAgenta()) && req.getNoviNazivAgenta() != null) {
                 if(noviNazivAgenta != null && !agentZaNekretnineRepository.findAgentZaNekretnineByNazivAgenta(noviNazivAgenta).isPresent()) {
                     agent.setNazivAgenta(noviNazivAgenta);
                 } else {
@@ -97,8 +99,8 @@ public class AgentZaNekretnineService {
             if(!agent.getSifra().equals(noviSifra)) {
                 agent.setSifra(noviSifra);
             }
-            if(!agent.getOpis().equals(noviOpis)) {
-                agent.setOpis(noviSifra);
+            if(agent.getOpis() == null || !agent.getOpis().equals(noviOpis)) {
+                agent.setOpis(noviOpis);
             }
 
             agentZaNekretnineRepository.delete(agentZaPut.get());

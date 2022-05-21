@@ -95,7 +95,9 @@ public class NekretninaService {
                 req.getTipNek() == null) return "Neispravan zahtjev za mijenjanje nekretnine!";
 
         Optional<Nekretnina> nekByNaz = nekretninaRepository.findNekretninaByNazivNek(req.getNazivNek());
+        Optional<Nekretnina> nekByAdr = nekretninaRepository.findNekretninaByAdresa(req.getAdresa());
         if(!nekByNaz.isPresent()) return "Nekretnina sa nazivom: " + req.getNazivNek() + " ne postoji!";
+        if(nekByAdr.isPresent()) return "Nekretnina sa adresom: " + req.getAdresa() + " već postoji!";
         if(!agentZaNekretnineRepository.findAgentZaNekretnineByNazivAgenta(req.getNazivAgenta()).isPresent()) return "Ne postoji agent sa nazivom: " + req.getNazivAgenta();
         if(!drzavaRepository.findDrzavaByNaziv(req.getDrzava()).isPresent()) return "Ne postoji država sa nazivom: " + req.getDrzava();
         if(!tipNekretnineRepository.findTipNekretnineByNazivTipa(req.getTipNek()).isPresent()) return "Ne postoji tip nekretnine sa nazivom: " + req.getTipNek();
