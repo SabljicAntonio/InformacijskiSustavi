@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+  <a href='/'>Prodaja nekretnina</a>
+  <a href='/nekretnine'>Upravljanje nekretninama</a>
+  <a href='/agenti'>Agenti</a>
+  <i class="fa fa-bars"></i>
+  </a>
+</div>
+<br><br>
+<button th:attr="onclick='pregledaj();'" class="btn btn-primary">Pregledaj agente</button>
+<button th:attr="onclick='dodaj();'" class="btn btn-primary">Dodaj agenta</button>
+<button th:attr="onclick='uredi();'" class="btn btn-primary">Uredi agenta</button>
+<button th:attr="onclick='obrisi();'" class="btn btn-primary">Obriši agenta</button>
+<br> <br>
+<table style="display:none;"class="table table-hover" id="agentiTable">
+  <thead>
+  <tr>
+    <th> Naziv agenta </th>
+    <th> Opis </th>
+    <th> Lozinka </th>
+    <th> E-adresa </th>
+    <th> Broj prodanih nekretnina </th>
+
+  </tr>
+  </thead>
+  <tbody id="podatciAg">
+  <tr th:each="agent : ${agents}">
+    <td><span th:text="${agent.getNazivAgenta()}"></span></td>
+    <td><span th:text="${agent.getOpis()}"></span></td>
+    <td><span th:text="${agent.getSifra()}"></span></td>
+    <td><span th:text="${agent.getEmail()}"></span></td>
+    <td><span th:text="${agent.getProdNek()}"></span></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<form id="form1" style="display:none;" action="/register1/agent" method="post">
+  <label for="ime">Ime:</label>
+  <input type="text" id="ime" name="ime"><br><br>
+  <label for="prezime">Prezime:</label>
+  <input type="text" id="prezime" name="prezime"><br><br>
+  <label for="oib">OIB:</label>
+  <input type="text" id="oib" name="oib"><br><br>
+  <label for="datumRod">Datum rođenja:</label>
+  <input type="date" id="datumRod" name="datumRod"><br><br>
+  <label for="opis">Opis:</label>
+  <input type="text" id="opis" name="opis"><br><br>
+  <label for="sifra">Lozinka:</label>
+  <input type="text" id="sifra" name="sifra"><br><br>
+  <label for="email">E-adresa:</label>
+  <input type="text" id="email" name="email"><br><br>
+  <label for="prodNek">Prodanih nekretnina:</label>
+  <input type="text" id="prodNek" name="prodNek"><br><br>
+  <label for="nazivAgenta">Naziv agenta:</label>
+  <input type="text" id="nazivAgenta" name="nazivAgenta"><br><br>
+
+  <input type="submit" value="Potvrdi">
+</form>
+
+<form id="form2" style="display:none;" action="/change1/agent" method="post">
+  <input type="hidden" name="_method" value="put" />
+  <label for="nazivAgenta">Naziv agenta:</label>
+  <input type="text" id="nazivAgent" name="nazivAgenta" list="datalist">
+  <label for="noviNazivAgenta">Novi naziv agenta:</label>
+  <input type="text" id="noviNazivAgenta" name="noviNazivAgenta"><br><br>
+  <label for="opis">Opis:</label>
+  <input type="text" id="opi" name="opis"><br><br>
+  <label for="sifra">Lozinka:</label>
+  <input type="text" id="sifr" name="sifra"><br><br>
+  <label for="email">E-adresa:</label>
+  <input type="text" id="emai" name="email"><br><br>
+  <label for="prodNek">Prodanih nekretnina:</label>
+  <input type="text" id="prodNe" name="prodNek"><br><br>
+
+  <input type="submit" value="Potvrdi">
+</form>
+
+<form id="form3" style="display:none;" action="/delete1/agent" method="post">
+  <input type="hidden" name="_method" value="delete" />
+  <label for="nazivAgenta">Naziv agenta:</label>
+  <input type="text" id="nazivAgen" name="nazivAgenta" list="datalist"><br><br>
+  <datalist id="datalist">
+    <option th:each="agent : ${agents}"  th:text="${agent.getNazivAgenta()}">
+  </datalist>
+  <input type="submit" value="Obriši">
+</form>
+
+<script>
+function pregledaj()    {
+        var x = document.getElementById('agentiTable');
+        if (x.style.display === "none") {
+        x.style.display = "";
+        document.getElementById('form1').style.display = "none";
+        document.getElementById('form2').style.display = "none";
+        document.getElementById('form3').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+    function dodaj()    {
+        var x = document.getElementById('form1');
+        if (x.style.display === "none") {
+        x.style.display = "";
+        document.getElementById('agentiTable').style.display = "none";
+        document.getElementById('form2').style.display = "none";
+        document.getElementById('form3').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+    function uredi()    {
+        var x = document.getElementById('form2');
+        if (x.style.display === "none") {
+        x.style.display = "";
+        document.getElementById('agentiTable').style.display = "none";
+        document.getElementById('form1').style.display = "none";
+        document.getElementById('form3').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+    function obrisi()    {
+        var x = document.getElementById('form3');
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        document.getElementById('agentiTable').style.display = "none";
+        document.getElementById('form1').style.display = "none";
+        document.getElementById('form2').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+</script>
+
+
+
+</body>
+</html>

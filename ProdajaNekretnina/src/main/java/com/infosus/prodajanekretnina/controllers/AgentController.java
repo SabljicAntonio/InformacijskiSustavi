@@ -19,7 +19,12 @@ public class AgentController {
         this.agentZaNekretnineService = agentZaNekretnineService;
     }
 
-
+    @PostMapping(path = "/register1/agent")
+    public String registriranjeAgent(RegistrationRequestAgent req)
+    {
+        String status = agentZaNekretnineService.registerAgent(req);
+        return status;
+    }
     @PostMapping(path = "/register/agent")
     public String registerAgent(@RequestBody RegistrationRequestAgent req)
     {
@@ -32,11 +37,21 @@ public class AgentController {
         String status = agentZaNekretnineService.deleteAgent(req);
         return status;
     }
+    @PostMapping(path = "/delete1/agent")
+    public String brisanjeAgent(DeleteRequestAgent req) {
+        String status = agentZaNekretnineService.deleteAgent(req);
+        return status;
+    }
     /**
      * Po nazivAgenta se gleda koji ce se agent promjenit
      * */
     @PutMapping(path = "/change/agent")
     public String putAgent(@RequestBody PutRequestAgent req) {
+        String status = agentZaNekretnineService.putAgent(req);
+        return status;
+    }
+    @PostMapping(path = "/change1/agent")
+    public String promjenaAgent(PutRequestAgent req) {
         String status = agentZaNekretnineService.putAgent(req);
         return status;
     }

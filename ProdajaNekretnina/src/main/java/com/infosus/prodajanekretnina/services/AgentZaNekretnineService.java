@@ -52,8 +52,8 @@ public class AgentZaNekretnineService {
         if(agentZaNekretnineRepository.findAgentZaNekretnineByEmail(req.getEmail()).isPresent()) return "Agent sa tim emailom već postoji!";
         AgentZaNekretnine a = new AgentZaNekretnine(req.getNazivAgenta(), req.getProdNek(), req.getEmail(), req.getSifra(), req.getOpis(), o);
         boolean reply = signUpAgent(a);
-        if(reply == false)  return "Neuspjesno registiranje agenta";
-        return "Uspjesno registiranje agenta: " + a;
+        if(reply == false)  return "Neuspjesno registiranje agenta!";
+        return "Uspjesno registiranje agenta!";
     }
 
     public String deleteAgent(DeleteRequestAgent req) {

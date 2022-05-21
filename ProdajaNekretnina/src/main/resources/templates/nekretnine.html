@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a href='/'>Prodaja nekretnina</a>
+    <a href='/nekretnine'>Upravljanje nekretninama</a>
+    <a href='/agenti'>Agenti</a>
+    <i class="fa fa-bars"></i>
+    </a>
+</div>
+<br><br>
+<button th:attr="onclick='dodaj();'" class="btn btn-primary">Dodaj nekretninu</button>
+<button th:attr="onclick='uredi();'" class="btn btn-primary">Uredi nekretninu</button>
+<button th:attr="onclick='obrisi();'" class="btn btn-primary">Obriši nekretninu</button>
+<br><br>
+<form id = "form1" style = "display:none" action="/register1/nekretnina" method="post">
+    <label for="nazivNek">Naziv nekretnine:</label>
+    <input type="text" id="nazivNek" name="nazivNek"><br><br>
+    <label for="adresa">Adresa:</label>
+    <input type="text" id="adresa" name="adresa"><br><br>
+    <label for="povrsina">Površina:</label>
+    <input type="text" id="povrsina" name="povrsina"><br><br>
+    <label for="ocjena">Ocjena:</label>
+    <input type="text" id="ocjena" name="ocjena"><br><br>
+    <label for="opis">Opis:</label>
+    <input type="text" id="opis" name="opis"><br><br>
+    <label for="cijena">Cijena:</label>
+    <input type="text" id="cijena" name="cijena"><br><br>
+    <label for="status">Status:</label>
+    <input type="text" id="status" name="status"><br><br>
+    <label for="nazivAgenta">Naziv agenta:</label>
+    <input type="text" id="nazivAgenta" name="nazivAgenta" list="datalist3">
+    <datalist id="datalist3">
+    <option th:each="agent : ${agents}"  th:text="${agent.getNazivAgenta()}">
+    </datalist><br><br>
+    <label for="drzava">Država:</label>
+    <input type="text" id="drzava" name="drzava" list="datalist1">
+    <datalist id="datalist1">
+        <option th:each="drzava : ${drzave}"  th:text="${drzava.getNaziv()}">
+    </datalist><br><br>
+    <label for="tipNek">Tip nekretnine:</label>
+    <input type="text" id="tipNek" name="tipNek" list="datalist2">
+    <datalist id="datalist2">
+        <option th:each="tip : ${tipovi}"  th:text="${tip.getNazivTipa()}">
+    </datalist><br><br>
+
+    <input type="submit" value="Potvrdi">
+</form>
+
+<form id="form2" style="display:none;" action="/change1/nekretnina" method="post">
+    <label for="nazivNek">Naziv nekretnine:</label>
+    <input type="text" id="nazivNe" name="nazivNek" list="datalist4">
+    <datalist id="datalist4">
+        <option th:each="nekretnina : ${nekretnine}"  th:text="${nekretnina.getNazivNek()}">
+    </datalist> <br><br>
+    <label for="noviNazivNek">Novi Naziv nekretnine:</label>
+    <input type="text" id="noviNazivNek" name="noviNazivNek"><br><br>
+    <label for="adresa">Adresa:</label>
+    <input type="text" id="adres" name="adresa"><br><br>
+    <label for="povrsina">Površina:</label>
+    <input type="text" id="povrsin" name="povrsina"><br><br>
+    <label for="ocjena">Ocjena:</label>
+    <input type="text" id="ocjen" name="ocjena"><br><br>
+    <label for="opis">Opis:</label>
+    <input type="text" id="opi" name="opis"><br><br>
+    <label for="cijena">Cijena:</label>
+    <input type="text" id="cijen" name="cijena"><br><br>
+    <label for="status">Status:</label>
+    <input type="text" id="statu" name="status"><br><br>
+    <label for="nazivAgenta">Naziv agenta:</label>
+    <input type="text" id="nazivAgent" name="nazivAgenta" list="datalist3"><br><br>
+    <label for="drzava">Država:</label>
+    <input type="text" id="drzav" name="drzava" list="datalist1"><br><br>
+    <label for="tipNek">Tip nekretnine:</label>
+    <input type="text" id="tipNe" name="tipNek" list="datalist2"><br><br>
+
+    <input type="submit" value="Potvrdi">
+</form>
+
+<form id="form3" style="display:none;" action="/delete1/nekretnina" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <label for="nazivNek">Naziv nekretnine:</label>
+    <input type="text" id="nazivNekr" name="nazivNek" list="datalist4">
+    <input type="submit" value="Obriši">
+</form>
+
+<script>
+    function dodaj()    {
+        var x = document.getElementById('form1');
+        if (x.style.display === "none") {
+        x.style.display = "";
+        document.getElementById('form2').style.display = "none";
+        document.getElementById('form3').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+    function uredi()    {
+        var x = document.getElementById('form2');
+        if (x.style.display === "none") {
+        x.style.display = "";
+        document.getElementById('form1').style.display = "none";
+        document.getElementById('form3').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+    function obrisi()    {
+        var x = document.getElementById('form3');
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        document.getElementById('form1').style.display = "none";
+        document.getElementById('form2').style.display = "none";
+    } else {
+        x.style.display = "none";
+  }
+    }
+</script>
+
+</body>
+</html>
