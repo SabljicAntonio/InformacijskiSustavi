@@ -13,7 +13,12 @@
         <span class="naslov">Nekretnine</span>
     </a>
 </nav>
-<input id="filterAll"></input><button onclick="filterDrzava()" class="btn btn-primary">Država</button>
+<input id="filterAll" type="text" name="city" list="datalist">
+<datalist id="datalist">
+    <option th:each="drzava : ${drzave}"  th:text="${drzava.getNaziv()}">
+</datalist>
+<button onclick="filterDrzava()" class="btn btn-primary">Država</button>
+<button onClick="window.location.reload();" class="btn btn-primary">Ukloni sve filtere</button>
 <div>
     <table class="table table-hover" id="nekretnineTable">
         <thead>
