@@ -8,21 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<div class="topnav" id="myTopnav">
-    <a href='/'>Prodaja nekretnina</a>
-    <a href='/nekretnine'>Upravljanje nekretninama</a>
-    <a href='/agenti'>Agenti</a>
+<div class="nav">
+    <a href='/' class="nav-link ">Prodaja nekretnina</a>
+    <a href='/nekretnine' class="nav-link">Upravljanje nekretninama</a>
+    <a href='/agenti' class="nav-link">Upravljanje agentima</a>
         <i class="fa fa-bars"></i>
     </a>
 </div>
-<br><br>
+<div style="padding: 0em 0.5em;">
 <input id="filterAll" type="text" name="city" list="datalist">
 <datalist id="datalist">
     <option th:each="drzava : ${drzave}"  th:text="${drzava.getNaziv()}">
 </datalist>
 <button onclick="filterDrzava()" class="btn btn-primary">Država</button>
 <button onClick="window.location.reload();" class="btn btn-primary">Ukloni sve filtere</button>
-
+</div>
 <div>
     <table class="table table-hover" id="nekretnineTable">
         <thead>
